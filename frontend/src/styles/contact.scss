@@ -1,4 +1,5 @@
-@import 'variables';
+@use 'variables' as *;
+@use 'sass:color';
 
 .contact-wrapper {
   background-color: $bg-main;
@@ -117,7 +118,7 @@
 
   .quick-answers-box {
     margin-top: 1rem;
-    background: scale-color($bg-main, $lightness: -2%);
+    background: color.scale($bg-main, $lightness: -2%);
     border: 1px solid $border-color;
     border-radius: 16px;
     padding: 1.5rem;

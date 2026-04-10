@@ -1,4 +1,5 @@
-@import 'variables';
+@use 'variables' as *;
+@use 'sass:color';
 
 /* Navbar */
 .home-nav {
@@ -172,7 +173,7 @@
           white-space: nowrap;
 
           &:hover {
-            background: scale-color($bg-main, $lightness: -2%);
+            background: color.scale($bg-main, $lightness: -2%);
             color: $accent;
           }
         }
