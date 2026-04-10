@@ -1,0 +1,213 @@
+@import 'variables';
+
+/* Navbar */
+.home-nav {
+  height: 80px;
+  background: $white;
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $primary;
+    cursor: pointer;
+
+    @media (max-width: 576px) {
+      font-size: 1.25rem;
+    }
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    cursor: pointer;
+    color: $primary;
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+
+  .nav-links-wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-between;
+
+    @media (max-width: 768px) {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: $bg-card;
+      flex-direction: column;
+      border-bottom: 1px solid $border-color;
+      padding: 1.5rem;
+      gap: 1.5rem;
+      box-shadow: $shadow-card;
+      
+      /* Toggle logic */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      &.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .nav-center-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 0 auto;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1.5rem;
+      margin: 0;
+      width: 100%;
+      border-bottom: 1px solid $border-color;
+      padding-bottom: 1.5rem;
+    }
+
+    .nav-link {
+      color: $text-main;
+      text-decoration: none;
+      font-weight: 500;
+      transition: $transition;
+      cursor: pointer;
+      &:hover { color: $accent; }
+
+      @media (max-width: 768px) {
+        font-size: 1.1rem;
+      }
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      @media (max-width: 768px) {
+        width: 100%;
+        text-align: center;
+      }
+
+      .dropdown-trigger {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        @media (max-width: 768px) {
+          justify-content: center;
+        }
+        &::after {
+          content: '▾';
+          font-size: 0.8rem;
+        }
+      }
+
+      &:hover .dropdown-menu {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+        visibility: visible;
+
+        @media (max-width: 768px) {
+          transform: none;
+          position: static;
+          box-shadow: none;
+          border: none;
+          padding-top: 0.5rem;
+        }
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(15px);
+        background: $bg-card;
+        min-width: 180px;
+        box-shadow: $shadow-card;
+        border-radius: $radius-md;
+        border: 1px solid $border-color;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 0;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+
+        @media (max-width: 768px) {
+          position: static;
+          box-shadow: none;
+          border: none;
+          transform: none;
+          display: none; // It will show on hover/click based on standard dropdown logic
+        }
+
+        span {
+          padding: 0.75rem 1.25rem;
+          color: $text-main;
+          font-weight: 500;
+          cursor: pointer;
+          transition: $transition;
+          font-size: 0.95rem;
+          white-space: nowrap;
+
+          &:hover {
+            background: scale-color($bg-main, $lightness: -2%);
+            color: $accent;
+          }
+        }
+      }
+      
+      /* Mobile override for dropdown visibility */
+      @media (max-width: 768px) {
+        &:hover .dropdown-menu {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      color: $text-main;
+      text-decoration: none;
+      font-weight: 500;
+      transition: $transition;
+      &:hover { color: $accent; }
+
+      @media (max-width: 768px) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}

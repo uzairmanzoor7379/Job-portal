@@ -1,0 +1,124 @@
+@import 'variables';
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-primary;
+  background-color: $bg-main;
+  color: $text-main;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: $primary;
+  transition: $transition;
+  
+  &:hover {
+    color: $primary-hover;
+  }
+}
+
+button {
+  cursor: pointer;
+  font-family: $font-primary;
+  border: none;
+  outline: none;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.app-container {
+  min-height: 100vh;
+}
+
+.centered-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+/* Default Panel styles */
+.glass-panel {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: $text-muted;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    color: $text-main;
+    font-family: $font-primary;
+    transition: $transition;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: $radius-md;
+  font-weight: 600;
+  text-align: center;
+  transition: $transition;
+
+  &-primary {
+    background: $primary;
+    color: $white;
+    box-shadow: $shadow-sm;
+
+    &:hover {
+      background: $primary-hover;
+      transform: translateY(-1px);
+      color:gray;
+    }
+  }
+
+  &-block {
+    display: block;
+    width: 100%;
+  }
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+.text-primary {
+  color: $primary;
+}
