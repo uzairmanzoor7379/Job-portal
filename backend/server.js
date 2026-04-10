@@ -12,12 +12,24 @@ connectDB();
 
 const app = express();
 
-// Issue #15 — add Helmet for comprehensive security headers
-app.use(helmet());
+// Issue #15 — add Helmet for comprehensive security headers with CSP allowing external images
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            imgSrc: ["'self'", "data:", "https://images.unsplash.com", "https://unsplash.com", "https://source.unsplash.com", "https://*.unsplash.com", "https://"],
+            connectSrc: ["'self'", "https://images.unsplash.com", "https://unsplash.com", "https://source.unsplash.com"],
+            frameSrc: ["'self'"],
+            fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
+        }
+    }
+}));
 
 // Issue #2 — restrict CORS to the known frontend origin; never use origin: true with credentials
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: [process.env.FRONTEND_URL || 'http://localhost:5173', 'https://job-portal-befp.onrender.com'],
     credentials: true,
 }));
 
