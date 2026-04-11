@@ -62,7 +62,7 @@ const EditJob = () => {
         }
     };
 
-    if (loading) return <div className="container profile-loading">Loading Job Data...</div>;
+    if (loading) return <div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b', fontSize: '2rem', fontWeight: '500'}}>Loading Job Data...</div>;
 
     return (
         <div className="auth-container profile-container" style={{ padding: '4rem 2rem' }}>

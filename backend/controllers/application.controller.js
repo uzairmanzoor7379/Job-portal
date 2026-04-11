@@ -35,6 +35,8 @@ const applyJob = async (req, res) => {
 
         const application = await Application.create({
             job: job._id,
+            jobId: job._id,
+            jobTitle: job.title,
             seeker: req.user._id,
             employer: job.employer,
             status: 'pending',

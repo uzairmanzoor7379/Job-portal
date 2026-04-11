@@ -6,6 +6,14 @@ const applicationSchema = mongoose.Schema({
         ref: 'Job',
         required: true
     },
+    jobId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    jobTitle: {
+        type: String,
+        required: true
+    },
     seeker: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

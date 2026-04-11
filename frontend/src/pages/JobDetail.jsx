@@ -43,7 +43,7 @@ const JobDetail = () => {
                     await fetchJobApplications(id);
                 }
             } catch (err) {
-                setError('Job not found');
+                setError('This job post has been deleted by the employer');
             }
         };
 
@@ -88,8 +88,8 @@ const JobDetail = () => {
     };
 
     if (jobLoading || !job) {
-        if (error) return <div className="container" style={{padding: '5rem', textAlign:'center', color: '#f43f5e'}}>{error}</div>;
-        return <div className="container profile-loading">Loading Job Details...</div>;
+        if (error) return <div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f43f5e', fontSize: '1.5rem'}}>{error}</div>;
+        return <div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b', fontSize: '2rem', fontWeight: '500'}}>Loading Job Details...</div>;
     }
 
     const isOwner = user && user.role === 'employer' && job.employer?._id === user._id;

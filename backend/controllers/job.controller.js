@@ -150,6 +150,7 @@ const deleteJob = async (req, res) => {
             return res.status(403).json({ message: 'Not authorized to delete this job' });
         }
 
+        // Hard delete: Remove from database completely (application records preserved via jobTitle denormalization)
         await job.deleteOne();
         res.json({ message: 'Job removed successfully' });
     } catch (error) {

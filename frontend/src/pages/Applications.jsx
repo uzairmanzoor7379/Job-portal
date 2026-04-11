@@ -18,7 +18,7 @@ const Applications = () => {
         // eslint-disable-next-line
     }, []);
 
-    if (loading) return <div className="container profile-loading">Loading Applications...</div>;
+    if (loading) return <div style={{height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#64748b', fontSize: '2rem', fontWeight: '500'}}>Loading Applications...</div>;
 
     return (
         <div className="applications-page">
@@ -36,8 +36,11 @@ const Applications = () => {
                     {seekerApplications.map(app => (
                         <div key={app._id} className="glass-panel application-card">
                             <div className="app-info">
-                                <h3 onClick={() => navigate(`/jobs/${app.job?._id}`)} style={{ cursor: 'pointer' }}>
-                                    {app.job?.title || 'Unknown Job'}
+                                <h3 
+                                    onClick={() => navigate(`/jobs/${app.jobId || app.job?._id}`)} 
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {app.jobTitle || app.job?.title || '[Job Deleted]'}
                                 </h3>
                                 <p className="company-name">{app.employer?.companyName || app.employer?.name}</p>
                                 <p className="applied-on">Applied on: {new Date(app.appliedAt).toLocaleDateString()}</p>

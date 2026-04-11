@@ -26,8 +26,8 @@ const Dashboard = () => {
 
     if (!user) {
         return (
-            <div className="container dashboard-loading">
-                <h2>Please Login to View Dashboard</h2>
+            <div style={{height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: '#64748b', gap: '2rem'}}>
+                <h2 style={{fontSize: '2rem', fontWeight: '500'}}>Please Login to View Dashboard</h2>
                 <button onClick={() => navigate('/login')} className="btn btn-primary btn-login-mt">Go to Login</button>
             </div>
         );
@@ -70,9 +70,14 @@ const Dashboard = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {seekerApplications.slice(0, 5).map(app => (
+                            {seekerApplications
+                                .filter(app => app.job !== null)
+                                .slice(0, 5)
+                                .map(app => (
                                 <tr key={app._id}>
-                                    <td><Link to={`/jobs/${app.job?._id}`} style={{ color: '#2563eb' }}>{app.job?.title}</Link></td>
+                                    <td>
+                                        <Link to={`/jobs/${app.jobId || app.job?._id}`} style={{ color: '#2563eb' }}>{app.jobTitle || app.job?.title}</Link>
+                                    </td>
                                     <td>{app.employer?.companyName || app.employer?.name}</td>
                                     <td>{new Date(app.appliedAt).toLocaleDateString()}</td>
                                     <td><span className={`status-badge ${app.status}`}>{app.status}</span></td>
