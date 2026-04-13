@@ -28,7 +28,9 @@ const userSchema = mongoose.Schema({
     location: { type: String },
     bio: { type: String },
     skills: [{ type: String }],
-    resume: { type: String },
+    resume: { type: String }, // ImageKit URL
+    resumeFileId: { type: String }, // ImageKit file ID for management
+    resumeFilePath: { type: String }, // ImageKit file path
     companyName: { type: String },
     companyDescription: { type: String },
     website: { type: String },

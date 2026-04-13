@@ -19,8 +19,8 @@ app.use(helmet({
             defaultSrc: ["'self'"],
             styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
             scriptSrc: ["'self'", "'unsafe-inline'"],
-            imgSrc: ["'self'", "data:", "https://images.unsplash.com", "https://unsplash.com", "https://source.unsplash.com"],
-            connectSrc: ["'self'", "https://images.unsplash.com", "https://unsplash.com", "https://source.unsplash.com"],
+            imgSrc: ["'self'", "data:", "https://images.unsplash.com", "https://unsplash.com", "https://source.unsplash.com", "https://ik.imagekit.io"],
+            connectSrc: ["'self'", "https://images.unsplash.com", "https://unsplash.com", "https://source.unsplash.com", "https://upload.imagekit.io"],
             frameSrc: ["'self'"],
             fontSrc: ["'self'", "https://fonts.googleapis.com", "https://fonts.gstatic.com"],
         }
@@ -44,9 +44,9 @@ app.use('/api/jobs', require('./routes/job.routes'));
 app.use('/api/applications', require('./routes/application.routes'));
 app.use('/api/queries', require('./routes/query.routes'));
 
-// Issue #13 — protect the /uploads directory; unauthenticated users cannot download resumes
-// Issue #12 is enforced at upload time (random filenames in upload.middleware.js)
-app.use('/uploads', protect, express.static(path.join(__dirname, 'uploads')));
+// Note: Resumes are now hosted on ImageKit instead of local /uploads directory
+// No need for local file serving since all resume uploads go directly to ImageKit
+// app.use('/uploads', protect, express.static(path.join(__dirname, 'uploads')));
 
 // Serve static files from public directory (for production build)
 app.use(express.static(path.join(__dirname, './public')));

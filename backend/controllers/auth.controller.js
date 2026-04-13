@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User.model');
+const { uploadToImageKit, deleteFromImageKit } = require('../services/imagekitService');
 
 
 // ─── Cookie helper ───────────────────────────────────────────────────────────
@@ -186,8 +187,33 @@ const updateUserProfile = async (req, res) => {
             user.password = req.body.password;
         }
 
+        // Handle resume upload to ImageKit
         if (req.file) {
-            user.resume = `/uploads/${req.file.filename}`;
+            try {
+                // Delete old resume from ImageKit if it exists
+                if (user.resumeFileId) {
+                    try {
+                        await deleteFromImageKit(user.resumeFileId);
+                    } catch (err) {
+                        console.error('Error deleting old resume:', err);
+                    }
+                }
+
+                // Upload new resume to ImageKit
+                const imagekitResponse = await uploadToImageKit(
+                    req.file.buffer,
+                    req.file.originalname,
+                    process.env.IMAGEKIT_FOLDER || 'job-portal/resumes'
+                );
+
+                // Store both URL and fileId for future reference
+                user.resume = imagekitResponse.url;
+                user.resumeFileId = imagekitResponse.fileId;
+                user.resumeFilePath = imagekitResponse.filePath;
+            } catch (error) {
+                console.error('Resume upload error:', error);
+                return res.status(500).json({ message: `Failed to upload resume: ${error.message}` });
+            }
         }
 
         const updatedUser = await user.save();
