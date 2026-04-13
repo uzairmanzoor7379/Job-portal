@@ -20,12 +20,8 @@ const uploadToImageKit = async (fileBuffer, fileName, folder = 'job-portal/resum
             file: fileBuffer,
             fileName: `${Date.now()}-${fileName}`,
             folder: folder,
-            isPrivateFile: true, // Make resumes private - only accessible with auth token
+            isPrivateFile: false, // Public file - directly accessible
             tags: ['resume', 'job-portal'],
-            customMetadata: {
-                type: 'resume',
-                uploadedAt: new Date().toISOString(),
-            },
         });
 
         return {
